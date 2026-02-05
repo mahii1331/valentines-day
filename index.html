@@ -215,14 +215,15 @@ button{
 
 <body>
 
-<!-- 🎵 BACKGROUND MUSIC -->
+<!-- 🎵 HIDDEN MUSIC PLAYER -->
 <iframe
+  id="musicPlayer"
   width="0"
   height="0"
-  src="https://www.youtube.com/embed/2Vv-BfVoq4g?start=21&autoplay=1&loop=1&playlist=2Vv-BfVoq4g"
+  src="https://www.youtube.com/embed/2Vv-BfVoq4g?start=21&loop=1&playlist=2Vv-BfVoq4g&enablejsapi=1"
   frameborder="0"
-  allow="autoplay"
-></iframe>
+  allow="autoplay">
+</iframe>
 
 <!-- CARD -->
 <div class="container" id="card">
@@ -259,6 +260,7 @@ const yesBtn = document.getElementById("yesBtn");
 const card  = document.getElementById("card");
 const result= document.getElementById("result");
 const msg   = document.getElementById("msg");
+const player = document.getElementById("musicPlayer");
 
 /* FUNNY TEXT */
 const jokes = [
@@ -321,7 +323,7 @@ function isOnYes(x,y){
   );
 }
 
-/* EVENTS */
+/* NO EVENTS */
 noBtn.addEventListener("mouseover",moveNo);
 noBtn.addEventListener("click",moveNo);
 noBtn.addEventListener("touchstart",moveNo);
@@ -342,10 +344,9 @@ yesBtn.addEventListener("mouseover",()=>{
 
 });
 
-/* YES CLICK */
+/* CONFETTI + RESULT */
 yesBtn.addEventListener("click",()=>{
 
-  // Confetti
   for(let i=0;i<40;i++){
 
     const conf = document.createElement("div");
@@ -367,6 +368,21 @@ yesBtn.addEventListener("click",()=>{
   result.style.display="flex";
 
 });
+
+/* 🎵 START MUSIC AFTER FIRST CLICK */
+let musicStarted = false;
+
+function startMusic(){
+
+  if(musicStarted) return;
+
+  player.src += "&autoplay=1&mute=0";
+
+  musicStarted = true;
+}
+
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
 
 </script>
 
