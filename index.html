@@ -16,7 +16,6 @@ body{
   justify-content:center;
   align-items:center;
 
-  /* ❤️ BACKGROUND IMAGE */
   background-image: url("https://wallpapercave.com/wp/wp7351486.jpg");
   background-size: cover;
   background-position: center;
@@ -25,7 +24,7 @@ body{
   font-family:"Comic Sans MS",cursive;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 body::before{
   content:"";
   position:fixed;
@@ -134,6 +133,42 @@ button{
   box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 
+/* SHAKE */
+@keyframes shake{
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  50%{transform:translateX(5px);}
+  75%{transform:translateX(-5px);}
+  100%{transform:translateX(0);}
+}
+
+/* HEARTS */
+.heart{
+  position:fixed;
+  font-size:22px;
+  animation:rise 2s linear forwards;
+  pointer-events:none;
+}
+
+@keyframes rise{
+  from{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
+  to{
+    transform:translateY(-120px) scale(1.5);
+    opacity:0;
+  }
+}
+
+/* CONFETTI */
+@keyframes fall{
+  to{
+    transform:translateY(100vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
 /* RESULT */
 #result{
   position:fixed;
@@ -177,7 +212,7 @@ button{
 
 <body>
 
-<!-- MAIN CARD -->
+<!-- CARD -->
 <div class="container" id="card">
 
   <div class="emoji">🥺💖👉👈</div>
@@ -213,18 +248,21 @@ const card  = document.getElementById("card");
 const msg   = document.getElementById("msg");
 const result= document.getElementById("result");
 
+/* FUNNY TEXT */
 const jokes = [
-  "Nice try 😂",
-  "Too slow 😏",
-  "Almost 😜",
-  "Nope 😎",
-  "Try again 😘",
-  "Hehe 🤭"
+  "Heyyy 😳 don’t do this",
+  "Wait wait wait 😭",
+  "Please nooo 🥺",
+  "Think again 😵‍💫",
+  "I’m scared 😨",
+  "Why you chasing me 😂",
+  "Okay okay I give up 😵",
+  "STOPPP 😭💖"
 ];
 
 let i = 0;
 
-/* MOVE NO SAFELY */
+/* MOVE NO */
 function moveNo(){
 
   const topSafe = 120;
@@ -243,6 +281,10 @@ function moveNo(){
 
   noBtn.style.left = x+"px";
   noBtn.style.top  = y+"px";
+
+  // shake
+  noBtn.style.animation = "shake 0.3s";
+  setTimeout(()=>noBtn.style.animation="",300);
 
   msg.textContent = jokes[i % jokes.length];
   i++;
@@ -269,12 +311,47 @@ function isOnYes(x,y){
   );
 }
 
-/* EVENTS */
+/* NO EVENTS */
 noBtn.addEventListener("mouseover",moveNo);
 noBtn.addEventListener("click",moveNo);
 noBtn.addEventListener("touchstart",moveNo);
 
+/* HEARTS ON YES */
+yesBtn.addEventListener("mouseover",()=>{
+
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "💖";
+
+  heart.style.left = Math.random()*window.innerWidth+"px";
+  heart.style.bottom = "30px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),2000);
+
+});
+
+/* YES CLICK */
 yesBtn.addEventListener("click",()=>{
+
+  // Confetti
+  for(let i=0;i<50;i++){
+
+    const conf = document.createElement("div");
+
+    conf.textContent = ["💖","🌹","💘","💕"][Math.floor(Math.random()*4)];
+
+    conf.style.position="fixed";
+    conf.style.left=Math.random()*100+"%";
+    conf.style.top="-20px";
+    conf.style.fontSize="24px";
+    conf.style.animation="fall 2s linear";
+
+    document.body.appendChild(conf);
+
+    setTimeout(()=>conf.remove(),2000);
+  }
 
   card.style.display="none";
   result.style.display="flex";
