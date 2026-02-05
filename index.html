@@ -4,94 +4,185 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Be My Valentine 💖</title>
+<title>Be My Valentine 🌹</title>
 
 <style>
 
+/* PAGE */
 body{
   margin:0;
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+
+  background:
+    radial-gradient(circle at top left,#ffb3c6,#ff4d6d),
+    radial-gradient(circle at bottom right,#ff758f,#ff1e56);
+
+  background-blend-mode:screen;
+
   font-family:"Comic Sans MS",cursive;
 }
 
 /* CARD */
 .container{
-  width:340px;
-  height:330px;
-  background:white;
-  border-radius:25px;
-  box-shadow:0 10px 25px rgba(0,0,0,.2);
+  width:350px;
+  height:350px;
+
+  background:
+    linear-gradient(135deg,#fff0f5,#ffe4ec,#ffd1dc);
+
+  border-radius:30px;
+
+  box-shadow:
+    0 0 20px rgba(255,0,80,.3),
+    0 10px 30px rgba(0,0,0,.2);
+
   text-align:center;
   padding:25px;
   position:relative;
   overflow:hidden;
+
+  border:3px solid #ff4d6d;
+}
+
+/* FLOWERS */
+.container::before{
+  content:"🌹 🌸 🌺 🌷 💐";
+  position:absolute;
+  top:8px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-size:22px;
+}
+
+.container::after{
+  content:"💐 🌷 🌺 🌸 🌹";
+  position:absolute;
+  bottom:8px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-size:22px;
 }
 
 /* TEXT */
 h1{
-  color:#ff4081;
-  font-size:24px;
-  margin-bottom:10px;
+  color:#d90429;
+  font-size:23px;
+  margin-top:35px;
+  margin-bottom:6px;
 }
 
 .emoji{
-  font-size:38px;
+  font-size:36px;
 }
 
 #msg{
-  height:20px;
+  height:22px;
   font-size:14px;
-  color:#777;
-  margin-bottom:20px;
+  color:#7a001f;
+  margin-bottom:18px;
 }
 
-/* BUTTONS */
+/* BUTTON RESET */
 button{
-  border:none;
-  padding:12px 26px;
-  font-size:17px;
-  border-radius:40px;
-  cursor:pointer;
-  position:absolute;
-  transition:.2s;
+  all: unset;
+  box-sizing: border-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 24px;
+  font-size: 16px;
+  font-family: inherit;
+
+  border-radius: 30px;
+  cursor: pointer;
+
+  position: absolute;
+  transition: .25s;
+
+  white-space: nowrap;
 }
 
-/* YES FIXED */
+/* YES */
 #yesBtn{
-  background:#4CAF50;
+  background:linear-gradient(to right,#2ecc71,#27ae60);
   color:white;
+
   left:35px;
   bottom:25px;
+
   z-index:5;
+
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+
+  animation:pulse 1.5s infinite;
 }
 
-/* NO FLOATING */
+/* YES PULSE */
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+  100%{transform:scale(1);}
+}
+
+/* NO */
 #noBtn{
-  background:#ff4d6d;
+  background:linear-gradient(to right,#ff4d6d,#ff1e56);
   color:white;
+
+  min-width:90px;
+  height:42px;
+
   right:35px;
   bottom:25px;
+
   z-index:2;
+
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 
 /* RESULT */
 #result{
   position:fixed;
   inset:0;
-  background:#fff0f6;
+
+  background:
+    linear-gradient(135deg,#ffe0ec,#ffb3c6,#ff758f);
+
   display:none;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+
   text-align:center;
+  padding:20px;
 }
 
 #result h2{
-  color:#ff4081;
+  color:#c9184a;
+  font-size:32px;
+}
+
+#result p{
+  font-size:18px;
+  color:#800020;
+}
+
+.hearts{
+  font-size:40px;
+  margin-top:10px;
+  animation:float 2s infinite alternate;
+}
+
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(-15px);}
 }
 
 </style>
@@ -102,11 +193,11 @@ button{
 <!-- MAIN CARD -->
 <div class="container" id="card">
 
-  <div class="emoji">🥺👉👈</div>
+  <div class="emoji">🥺🌹👉👈</div>
 
-  <h1>Will you be my Valentine, Priyaa? 💘</h1>
+  <h1>Will you be my Valentine, Priya? 💘</h1>
 
-  <div id="msg">(You know the answer 😌)</div>
+  <div id="msg">(Say yes and get unlimited roses 😌🌹)</div>
 
   <button id="yesBtn">Yes 💖</button>
   <button id="noBtn">No 🙄</button>
@@ -116,9 +207,14 @@ button{
 <!-- RESULT -->
 <div id="result">
 
-  <h2>YAYYY 😍💘</h2>
+  <h2>YOU SAID YES!!! 😍🌹</h2>
 
-  <p>You said YES!!!<br>Best decision ever 🥰</p>
+  <p>
+    My heart is yours 💘<br>
+    Happy Valentine’s Day 🥰💐
+  </p>
+
+  <div class="hearts">💖 🌹 💕 🌷 💘</div>
 
 </div>
 
@@ -131,27 +227,30 @@ const msg   = document.getElementById("msg");
 const result= document.getElementById("result");
 
 const jokes = [
-  "Nice try 😂",
-  "Too slow 😏",
-  "Almost 😜",
-  "Nope 😎",
-  "Try again 😘",
-  "Hehe 🤭"
+  "Nice try 😂🌹",
+  "Too slow 😏💐",
+  "Almost 😜🌸",
+  "Nope 😎🌷",
+  "Try again 😘🌹",
+  "Hehe 🤭💖"
 ];
 
 let i = 0;
 
-/* MOVE NO */
+/* MOVE NO SAFELY */
 function moveNo(){
 
-  const maxX = card.clientWidth  - noBtn.offsetWidth;
-  const maxY = card.clientHeight - noBtn.offsetHeight - 70;
+  const topSafe = 130;   // below title
+  const bottomSafe = 90; // above buttons
+
+  const maxX = card.clientWidth - noBtn.offsetWidth;
+  const maxY = card.clientHeight - noBtn.offsetHeight - bottomSafe;
 
   let x,y;
 
   do{
     x = Math.random()*maxX;
-    y = Math.random()*maxY;
+    y = Math.random()*(maxY - topSafe) + topSafe;
   }
   while(isOnYes(x,y));
 
@@ -162,7 +261,7 @@ function moveNo(){
   i++;
 }
 
-/* PREVENT OVERLAP */
+/* AVOID YES */
 function isOnYes(x,y){
 
   const yes = yesBtn.getBoundingClientRect();
