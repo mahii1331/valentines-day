@@ -215,15 +215,10 @@ button{
 
 <body>
 
-<!-- 🎵 HIDDEN MUSIC PLAYER -->
-<iframe
-  id="musicPlayer"
-  width="0"
-  height="0"
-  src="https://www.youtube.com/embed/2Vv-BfVoq4g?start=21&loop=1&playlist=2Vv-BfVoq4g&enablejsapi=1"
-  frameborder="0"
-  allow="autoplay">
-</iframe>
+<!-- 🎵 BACKGROUND MUSIC (MP3) -->
+<audio id="bgMusic" preload="auto" loop>
+  <source src="ed_sheeran_perfect.mp3" type="audio/mpeg">
+</audio>
 
 <!-- CARD -->
 <div class="container" id="card">
@@ -260,7 +255,7 @@ const yesBtn = document.getElementById("yesBtn");
 const card  = document.getElementById("card");
 const result= document.getElementById("result");
 const msg   = document.getElementById("msg");
-const player = document.getElementById("musicPlayer");
+const music = document.getElementById("bgMusic");
 
 /* FUNNY TEXT */
 const jokes = [
@@ -344,6 +339,19 @@ yesBtn.addEventListener("mouseover",()=>{
 
 });
 
+/* START MUSIC ON FIRST TAP */
+let musicStarted = false;
+
+function startMusic(){
+  if(musicStarted) return;
+
+  music.play().catch(()=>{});
+  musicStarted = true;
+}
+
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
+
 /* CONFETTI + RESULT */
 yesBtn.addEventListener("click",()=>{
 
@@ -368,21 +376,6 @@ yesBtn.addEventListener("click",()=>{
   result.style.display="flex";
 
 });
-
-/* 🎵 START MUSIC AFTER FIRST CLICK */
-let musicStarted = false;
-
-function startMusic(){
-
-  if(musicStarted) return;
-
-  player.src += "&autoplay=1&mute=0";
-
-  musicStarted = true;
-}
-
-document.addEventListener("click", startMusic);
-document.addEventListener("touchstart", startMusic);
 
 </script>
 
