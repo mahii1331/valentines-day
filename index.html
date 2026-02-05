@@ -17,14 +17,15 @@
 
     .container {
       background: white;
-      padding: 40px 30px;
+      padding: 35px 25px;
       border-radius: 25px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       text-align: center;
-      width: 320px;
-      height: 300px;
+      width: 330px;
+      height: 320px;
       position: relative;
       animation: pop 0.8s ease;
+      overflow: hidden;
     }
 
     @keyframes pop {
@@ -35,131 +36,191 @@
 
     h1 {
       color: #ff4081;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     .emoji {
-      font-size: 40px;
-      margin-bottom: 15px;
+      font-size: 38px;
+      margin-bottom: 8px;
     }
 
     .message {
       font-size: 14px;
       color: #666;
-      height: 20px;
+      height: 22px;
       margin-bottom: 20px;
+      transition: 0.3s;
     }
 
     button {
-      padding: 12px 28px;
+      padding: 12px 26px;
       font-size: 18px;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       position: absolute;
-      transition: 0.2s;
+      transition: 0.25s ease;
+      user-select: none;
     }
 
+    /* YES BUTTON */
     #yesBtn {
       background: #4CAF50;
       color: white;
-      left: 50px;
-      bottom: 40px;
+      left: 40px;
+      bottom: 25px;
+      z-index: 10;
       animation: bounce 1.5s infinite;
     }
 
     @keyframes bounce {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      50% { transform: translateY(-6px); }
     }
 
+    /* NO BUTTON */
     #noBtn {
       background: #ff4d6d;
       color: white;
-      right: 50px;
-      bottom: 40px;
+      right: 40px;
+      bottom: 25px;
+      z-index: 1;
     }
 
+    /* CELEBRATION */
     .celebrate {
       position: fixed;
       inset: 0;
       background: #fff0f6;
-      display: flex;
-      flex-direction: column;
+      display: none;
       justify-content: center;
       align-items: center;
-      font-size: 26px;
+      flex-direction: column;
       text-align: center;
-      display: none;
+      font-size: 26px;
+      padding: 20px;
     }
 
     .celebrate h2 {
       color: #ff4081;
+      margin-bottom: 10px;
+    }
+
+    .hearts {
+      font-size: 40px;
+      animation: float 2s infinite alternate;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px); }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- MAIN CARD -->
   <div class="container" id="card">
+
     <div class="emoji">🥺👉👈</div>
 
-    <h1>Will you be my Valentine?</h1>
+    <h1>Will you be my Valentine Priyaaaaaaaa ?</h1>
 
     <div class="message" id="msg">
-      (You can’t say no… just saying 😌)
+      (You know the answer 😌💖)
     </div>
 
     <button id="yesBtn">Yes 💖</button>
     <button id="noBtn">No 🙄</button>
+
   </div>
 
+  <!-- CELEBRATION SCREEN -->
   <div class="celebrate" id="celebration">
+
     <h2>OMG YOU SAID YES!!! 😍💘</h2>
+
     <p>
-      Best. Decision. Ever. 🥰<br><br>
-      See you on Valentine’s Day 💐
+      Best decision ever 🥰💐<br><br>
+      Happy Valentine’s Day 💝
     </p>
+
+    <div class="hearts">💖 💘 💕 💞 💗</div>
+
   </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
     const container = document.getElementById("card");
     const msg = document.getElementById("msg");
-    const yesBtn = document.getElementById("yesBtn");
     const celebration = document.getElementById("celebration");
 
     const funnyTexts = [
-      "Hey! Where do you think you're going? 😤",
+      "Too slow 😂",
       "Nice try 😏",
-      "Nope. Not today 😎",
-      "I’m too fast for you 🏃‍♂️💨",
-      "You really tried 😂",
-      "Mission: Click No ❌ FAILED",
-      "Try harder 😌"
+      "Nope 😜",
+      "Almost 😎",
+      "Try again 😘",
+      "Not happening 😌",
+      "Hehe 🤭"
     ];
 
-    let count = 0;
-
-    noBtn.addEventListener("mouseover", moveNo);
-    noBtn.addEventListener("click", moveNo);
+    let counter = 0;
 
     function moveNo() {
       const maxX = container.clientWidth - noBtn.offsetWidth;
-      const maxY = container.clientHeight - noBtn.offsetHeight;
+      const maxY = container.clientHeight - noBtn.offsetHeight - 70;
 
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+      let x, y, isOverlapping;
+
+      do {
+        x = Math.random() * maxX;
+        y = Math.random() * maxY;
+
+        isOverlapping = checkOverlap(x, y);
+
+      } while (isOverlapping);
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
 
-      msg.textContent = funnyTexts[count % funnyTexts.length];
-      count++;
+      msg.textContent = funnyTexts[counter % funnyTexts.length];
+      counter++;
     }
 
+    function checkOverlap(x, y) {
+      const yesRect = yesBtn.getBoundingClientRect();
+      const contRect = container.getBoundingClientRect();
+
+      const noRect = {
+        left: contRect.left + x,
+        top: contRect.top + y,
+        right: contRect.left + x + noBtn.offsetWidth,
+        bottom: contRect.top + y + noBtn.offsetHeight
+      };
+
+      return !(
+        noRect.right < yesRect.left ||
+        noRect.left > yesRect.right ||
+        noRect.bottom < yesRect.top ||
+        noRect.top > yesRect.bottom
+      );
+    }
+
+    // Desktop
+    noBtn.addEventListener("mouseover", moveNo);
+
+    // Mobile
+    noBtn.addEventListener("touchstart", moveNo);
+
+    // Click safety
+    noBtn.addEventListener("click", moveNo);
+
+    // YES CLICK
     yesBtn.addEventListener("click", () => {
-      document.getElementById("card").style.display = "none";
+      card.style.display = "none";
       celebration.style.display = "flex";
     });
   </script>
