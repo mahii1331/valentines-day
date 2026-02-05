@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine 💘</title>
+
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    .container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 320px;
+      height: 300px;
+      position: relative;
+      animation: pop 0.8s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      color: #ff4081;
+      margin-bottom: 10px;
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .message {
+      font-size: 14px;
+      color: #666;
+      height: 20px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.2s;
+    }
+
+    #yesBtn {
+      background: #4CAF50;
+      color: white;
+      left: 50px;
+      bottom: 40px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    #noBtn {
+      background: #ff4d6d;
+      color: white;
+      right: 50px;
+      bottom: 40px;
+    }
+
+    .celebrate {
+      position: fixed;
+      inset: 0;
+      background: #fff0f6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      text-align: center;
+      display: none;
+    }
+
+    .celebrate h2 {
+      color: #ff4081;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="card">
+    <div class="emoji">🥺👉👈</div>
+
+    <h1>Will you be my Valentine?</h1>
+
+    <div class="message" id="msg">
+      (You can’t say no… just saying 😌)
+    </div>
+
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙄</button>
+  </div>
+
+  <div class="celebrate" id="celebration">
+    <h2>OMG YOU SAID YES!!! 😍💘</h2>
+    <p>
+      Best. Decision. Ever. 🥰<br><br>
+      See you on Valentine’s Day 💐
+    </p>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const container = document.getElementById("card");
+    const msg = document.getElementById("msg");
+    const yesBtn = document.getElementById("yesBtn");
+    const celebration = document.getElementById("celebration");
+
+    const funnyTexts = [
+      "Hey! Where do you think you're going? 😤",
+      "Nice try 😏",
+      "Nope. Not today 😎",
+      "I’m too fast for you 🏃‍♂️💨",
+      "You really tried 😂",
+      "Mission: Click No ❌ FAILED",
+      "Try harder 😌"
+    ];
+
+    let count = 0;
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("click", moveNo);
+
+    function moveNo() {
+      const maxX = container.clientWidth - noBtn.offsetWidth;
+      const maxY = container.clientHeight - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      msg.textContent = funnyTexts[count % funnyTexts.length];
+      count++;
+    }
+
+    yesBtn.addEventListener("click", () => {
+      document.getElementById("card").style.display = "none";
+      celebration.style.display = "flex";
+    });
+  </script>
+
+</body>
+</html>
