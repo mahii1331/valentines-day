@@ -6,8 +6,8 @@
 
 <title>Be My Valentine 💖</title>
 
-<!-- Romantic Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 
@@ -23,75 +23,88 @@ body{
   background-size: cover;
   background-position: center;
 
-  font-family: 'Pacifico', cursive;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* DARK ROSE OVERLAY */
+/* OVERLAY */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:rgba(180,0,60,0.35);
+  background:rgba(170,0,50,0.35);
   z-index:-1;
 }
 
-/* ❤️ BIG PREMIUM HEART */
+/* ❤️ HEART */
 .container{
-  width:460px;
-  height:440px;
+  width:480px;
+  height:460px;
 
   background:
-    radial-gradient(circle at top,#ffe6ef,#ffc2d4,#ff8fab);
+    radial-gradient(circle at top,#ffe6ef,#ffb6c9,#ff8fab);
 
   position:relative;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
   text-align:center;
-  padding:70px 40px 40px;
+  padding:40px;
 
   box-shadow:
     0 0 40px rgba(255,40,90,.6),
     0 25px 60px rgba(0,0,0,.4);
 
   /* HEART SHAPE */
-  clip-path: path("M230 60 C190 0 0 40 0 190 C0 330 230 430 230 430 C230 430 460 330 460 190 C460 40 270 0 230 60 Z");
+  clip-path: path("M240 60 C200 0 0 40 0 200 C0 340 240 450 240 450 C240 450 480 340 480 200 C480 40 280 0 240 60 Z");
 
   border:5px solid #ff4d6d;
 
-  animation:glow 2s infinite alternate;
+  animation:glow 2.5s infinite alternate;
 }
 
 /* GLOW */
 @keyframes glow{
   from{
     box-shadow:
-      0 0 30px rgba(255,50,100,.5),
+      0 0 25px rgba(255,80,130,.6),
       0 15px 40px rgba(0,0,0,.4);
   }
   to{
     box-shadow:
-      0 0 55px rgba(255,80,130,.9),
+      0 0 50px rgba(255,120,170,.9),
       0 25px 60px rgba(0,0,0,.4);
   }
 }
 
-/* TEXT */
+/* EMOJIS */
 .emoji{
-  font-size:36px;
+  font-size:32px;
   margin-bottom:12px;
 }
 
+/* TITLE */
 h1{
-  font-family:'Playfair Display',serif;
+  font-family:'Playfair Display', serif;
+  font-size:36px;
   color:#b8002e;
-  font-size:34px;
-  line-height:1.25;
-  margin-bottom:12px;
-  text-shadow:1px 1px 4px rgba(255,255,255,.6);
+
+  margin:10px 0 15px;
+  line-height:1.3;
+
+  text-shadow:1px 1px 4px rgba(255,255,255,.7);
 }
 
+/* SUBTEXT */
 #msg{
-  font-size:17px;
+  font-family:'Pacifico', cursive;
+  font-size:20px;
   color:#7a001f;
-  margin-bottom:35px;
+
+  margin-bottom:25px;
+  max-width:80%;
 }
 
 /* BUTTONS */
@@ -103,17 +116,16 @@ button{
   align-items:center;
   justify-content:center;
 
-  padding:14px 34px;
+  padding:14px 36px;
   font-size:18px;
-  font-family:inherit;
 
   border-radius:40px;
   cursor:pointer;
 
   position:absolute;
-  transition:.25s;
+  bottom:70px;
 
-  white-space:nowrap;
+  transition:.25s;
 }
 
 /* YES */
@@ -121,21 +133,13 @@ button{
   background:linear-gradient(to right,#2ecc71,#27ae60);
   color:white;
 
-  left:70px;
-  bottom:70px;
+  left:90px;
 
   z-index:5;
 
-  box-shadow:0 5px 15px rgba(0,0,0,.3);
+  box-shadow:0 6px 15px rgba(0,0,0,.3);
 
   animation:pulse 1.5s infinite;
-}
-
-/* PULSE */
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-  100%{transform:scale(1);}
 }
 
 /* NO */
@@ -143,15 +147,19 @@ button{
   background:linear-gradient(to right,#ff4d6d,#ff1e56);
   color:white;
 
+  right:90px;
+
   min-width:100px;
   height:46px;
 
-  right:70px;
-  bottom:70px;
+  box-shadow:0 6px 15px rgba(0,0,0,.3);
+}
 
-  z-index:2;
-
-  box-shadow:0 5px 15px rgba(0,0,0,.3);
+/* PULSE */
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+  100%{transform:scale(1);}
 }
 
 /* SHAKE */
@@ -182,12 +190,12 @@ button{
 
 #result h2{
   color:white;
-  font-size:38px;
+  font-size:40px;
   text-shadow:2px 2px 6px rgba(0,0,0,.4);
 }
 
 #result p{
-  font-size:20px;
+  font-size:22px;
   color:#fff0f6;
 }
 
@@ -207,7 +215,7 @@ button{
 
 <body>
 
-<!-- 🎵 BACKGROUND MUSIC -->
+<!-- 🎵 MUSIC -->
 <iframe
   width="0"
   height="0"
@@ -216,7 +224,7 @@ button{
   allow="autoplay"
 ></iframe>
 
-<!-- ❤️ PREMIUM HEART -->
+<!-- ❤️ HEART CARD -->
 <div class="container" id="card">
 
   <div class="emoji">🥺 💖 👉 👈</div>
@@ -224,7 +232,7 @@ button{
   <h1>Will you be my Valentine,<br>Priya? 💘</h1>
 
   <div id="msg">
-    (I wrote code instead of sleeping for this 😭💻❤️)
+    I wrote code instead of sleeping for this 😭💻❤️
   </div>
 
   <button id="yesBtn">Yes 💖</button>
@@ -252,6 +260,7 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const card  = document.getElementById("card");
 const result= document.getElementById("result");
+const msg   = document.getElementById("msg");
 
 const jokes = [
   "Waittt 😭",
@@ -267,8 +276,8 @@ let i = 0;
 
 function moveNo(){
 
-  const topSafe = 160;
-  const bottomSafe = 120;
+  const topSafe = 170;
+  const bottomSafe = 130;
 
   const maxX = card.clientWidth - noBtn.offsetWidth;
   const maxY = card.clientHeight - noBtn.offsetHeight - bottomSafe;
@@ -287,7 +296,7 @@ function moveNo(){
   noBtn.style.animation = "shake .3s";
   setTimeout(()=>noBtn.style.animation="",300);
 
-  document.getElementById("msg").textContent = jokes[i % jokes.length];
+  msg.textContent = jokes[i % jokes.length];
   i++;
 }
 
