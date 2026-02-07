@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Be My Valentine 💖</title>
 
 <!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+rel="stylesheet">
 
 <style>
 
@@ -26,9 +28,13 @@ body{
   justify-content:center;
   align-items:center;
 
-  background-image: url("https://wallpapercave.com/wp/wp7351486.jpg");
-  background-size: cover;
-  background-position: center;
+  /* 🌅 Romantic Gradient */
+  background: linear-gradient(135deg,
+    #ff9a9e,
+    #fad0c4,
+    #fbc2eb,
+    #a18cd1
+  );
 
   font-family: 'Pacifico', cursive;
 }
@@ -38,7 +44,7 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:rgba(255,0,80,0.25);
+  background:rgba(255,0,80,0.15);
   z-index:-1;
 }
 
@@ -53,8 +59,8 @@ body::before{
   border-radius:25px;
 
   box-shadow:
-    0 0 25px rgba(255,0,80,.3),
-    0 15px 35px rgba(0,0,0,.3);
+    0 0 25px rgba(255,0,80,.25),
+    0 15px 35px rgba(0,0,0,.25);
 
   text-align:center;
   padding:22px;
@@ -177,8 +183,12 @@ button{
   position:fixed;
   inset:0;
 
-  background:
-    linear-gradient(135deg,#ffe0ec,#ffb3c6,#ff758f);
+  background: linear-gradient(135deg,
+    #ff9a9e,
+    #fad0c4,
+    #fbc2eb,
+    #a18cd1
+  );
 
   display:none;
   justify-content:center;
@@ -199,15 +209,13 @@ button{
   color:#800020;
 }
 
-/* 💍 RING IMAGE */
+/* RING */
 #ringPic{
-  width:180px;
-  height:180px;
-
+  width:170px;
+  height:170px;
   object-fit:cover;
 
   border-radius:50%;
-
   border:5px solid #ff4d6d;
 
   margin:15px 0;
@@ -215,22 +223,6 @@ button{
   box-shadow:
     0 0 20px rgba(255,60,120,.6),
     0 8px 20px rgba(0,0,0,.3);
-
-  animation:glow 2s infinite alternate;
-}
-
-/* RING GLOW */
-@keyframes glow{
-  from{
-    box-shadow:
-      0 0 15px rgba(255,80,130,.5),
-      0 5px 15px rgba(0,0,0,.3);
-  }
-  to{
-    box-shadow:
-      0 0 30px rgba(255,120,170,.9),
-      0 10px 25px rgba(0,0,0,.4);
-  }
 }
 
 /* COUNTDOWN */
@@ -246,7 +238,7 @@ button{
   box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
 
-/* MOBILE BOOST */
+/* MOBILE */
 @media(max-width:480px){
 
   #ringPic{
@@ -265,7 +257,6 @@ button{
   #countdown{
     font-size:18px;
   }
-
 }
 
 </style>
@@ -294,11 +285,10 @@ button{
 
 <!-- RESULT -->
 <div id="result">
-  <h2>Happy Valentines Day 💖</h2>
+
   <h2>FOREVER STARTS 😍💍</h2>
 
-  <!-- 💍 RING IMAGE -->
-  <img id="ringPic" src="ring.jpg" alt="Our Engagement Ring">
+  <img id="ringPic" src="ring.jpeg" alt="Our Ring">
 
   <p>
     We’re getting married! 💞<br>
@@ -359,7 +349,6 @@ function moveNo(){
   i++;
 }
 
-/* AVOID YES */
 function isOnYes(x,y){
 
   const yes = yesBtn.getBoundingClientRect();
@@ -406,10 +395,9 @@ yesBtn.addEventListener("click",()=>{
   startCountdown();
 });
 
-/* 💍 COUNTDOWN */
+/* COUNTDOWN */
 function startCountdown(){
 
-  // April 23, 2026
   const weddingDate = new Date("2026-04-23T00:00:00").getTime();
 
   setInterval(()=>{
