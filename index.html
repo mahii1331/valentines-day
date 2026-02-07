@@ -199,14 +199,48 @@ button{
   color:#800020;
 }
 
+/* 💍 RING IMAGE */
+#ringPic{
+  width:180px;
+  height:180px;
+
+  object-fit:cover;
+
+  border-radius:50%;
+
+  border:5px solid #ff4d6d;
+
+  margin:15px 0;
+
+  box-shadow:
+    0 0 20px rgba(255,60,120,.6),
+    0 8px 20px rgba(0,0,0,.3);
+
+  animation:glow 2s infinite alternate;
+}
+
+/* RING GLOW */
+@keyframes glow{
+  from{
+    box-shadow:
+      0 0 15px rgba(255,80,130,.5),
+      0 5px 15px rgba(0,0,0,.3);
+  }
+  to{
+    box-shadow:
+      0 0 30px rgba(255,120,170,.9),
+      0 10px 25px rgba(0,0,0,.4);
+  }
+}
+
 /* COUNTDOWN */
 #countdown{
-  margin-top:20px;
+  margin-top:10px;
   font-size:20px;
   color:#b8002e;
 
   background:white;
-  padding:12px 18px;
+  padding:10px 18px;
   border-radius:15px;
 
   box-shadow:0 4px 12px rgba(0,0,0,.2);
@@ -214,6 +248,11 @@ button{
 
 /* MOBILE BOOST */
 @media(max-width:480px){
+
+  #ringPic{
+    width:150px;
+    height:150px;
+  }
 
   h1{font-size:22px;}
   #msg{font-size:13px;}
@@ -255,8 +294,11 @@ button{
 
 <!-- RESULT -->
 <div id="result">
-
+  <h2>Happy Valentines Day 💖</h2>
   <h2>FOREVER STARTS 😍💍</h2>
+
+  <!-- 💍 RING IMAGE -->
+  <img id="ringPic" src="ring.jpeg" alt="Our Engagement Ring">
 
   <p>
     We’re getting married! 💞<br>
@@ -355,41 +397,8 @@ function startMusic(){
 document.addEventListener("click",startMusic);
 document.addEventListener("touchstart",startMusic);
 
-/* HEARTS */
-yesBtn.addEventListener("mouseover",()=>{
-
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.textContent="💖";
-
-  heart.style.left=Math.random()*100+"%";
-  heart.style.bottom="20px";
-
-  document.body.appendChild(heart);
-
-  setTimeout(()=>heart.remove(),2000);
-});
-
 /* YES CLICK */
 yesBtn.addEventListener("click",()=>{
-
-  // Confetti
-  for(let i=0;i<40;i++){
-
-    const conf=document.createElement("div");
-
-    conf.textContent=["💖","🌹","💘","💕"][Math.floor(Math.random()*4)];
-
-    conf.style.position="fixed";
-    conf.style.left=Math.random()*100+"%";
-    conf.style.top="-20px";
-    conf.style.fontSize="24px";
-    conf.style.animation="fall 2s linear";
-
-    document.body.appendChild(conf);
-
-    setTimeout(()=>conf.remove(),2000);
-  }
 
   card.style.display="none";
   result.style.display="flex";
@@ -397,7 +406,7 @@ yesBtn.addEventListener("click",()=>{
   startCountdown();
 });
 
-/* 💍 WEDDING COUNTDOWN */
+/* 💍 COUNTDOWN */
 function startCountdown(){
 
   // April 23, 2026
