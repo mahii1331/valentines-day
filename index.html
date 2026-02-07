@@ -139,6 +139,15 @@ button{
   100%{transform:scale(1);}
 }
 
+/* SHAKE */
+@keyframes shake{
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  50%{transform:translateX(5px);}
+  75%{transform:translateX(-5px);}
+  100%{transform:translateX(0);}
+}
+
 /* RESULT */
 #result{
   position:fixed;
@@ -200,11 +209,10 @@ button{
   box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
 
-/* 💌 LETTER OVERLAY */
+/* 💌 LETTER */
 #letterOverlay{
   position:fixed;
   inset:0;
-
   background:rgba(0,0,0,.4);
 
   display:none;
@@ -214,7 +222,6 @@ button{
   z-index:50;
 }
 
-/* LETTER */
 #letter{
   width:90%;
   max-width:340px;
@@ -240,14 +247,12 @@ button{
 
 #letter h3{
   color:#b8002e;
-  margin-bottom:10px;
 }
 
 #letter p{
   font-size:15px;
   color:#600018;
   line-height:1.6;
-  margin-bottom:15px;
 }
 
 #closeLetter{
@@ -277,7 +282,7 @@ button{
 
   <h1>Will you be my Valentine,<br>Priya? 💘</h1>
 
-  <div id="msg">(I coded this with love 😭💻❤️)</div>
+  <div id="msg">(Try clicking No 😏😂)</div>
 
   <button id="yesBtn">Yes 💖</button>
   <button id="noBtn">No 🙄</button>
@@ -308,17 +313,10 @@ button{
     <h3>💌 My Love, Priya…</h3>
 
     <p>
-      From the first day I met you,  
-      my world changed forever 💖<br><br>
-
-      You are my happiness, my peace,  
-      my best friend, and my home 🏡💕<br><br>
-
-      I promise to hold your hand  
-      through every smile and every storm 🤝💞<br><br>
-
-      April 23, 2026 is only the beginning…  
-      Our forever starts there 💍❤️
+      From the first day I met you, my world changed forever 💖<br><br>
+      You are my happiness, my peace, my best friend, and my home 🏡💕<br><br>
+      I promise to hold your hand through every smile and every storm 🤝💞<br><br>
+      April 23, 2026 is only the beginning… Our forever starts there 💍❤️
     </p>
 
     <button id="closeLetter">Close 💕</button>
@@ -360,6 +358,16 @@ const countdownEl=document.getElementById("countdown");
 const letterOverlay=document.getElementById("letterOverlay");
 const closeLetter=document.getElementById("closeLetter");
 
+/* FUNNY MESSAGES */
+const jokes=[
+  "Wait 😭","Please 🥺","Heyyy 😳",
+  "Not fair 😂","Stoppp 😵",
+  "I’m scared 😨","Why you chasing me 😵‍💫",
+  "Okay okay I surrender 😩💖"
+];
+
+let jokeIndex=0;
+
 /* MOVE NO */
 function moveNo(){
 
@@ -375,8 +383,15 @@ function moveNo(){
 
   noBtn.style.left=x+"px";
   noBtn.style.top=y+"px";
+
+  noBtn.style.animation="shake .3s";
+  setTimeout(()=>noBtn.style.animation="",300);
+
+  msg.textContent=jokes[jokeIndex%jokes.length];
+  jokeIndex++;
 }
 
+/* AVOID YES */
 function isOnYes(x,y){
 
   const yes=yesBtn.getBoundingClientRect();
@@ -414,7 +429,6 @@ yesBtn.addEventListener("click",()=>{
 
   startCountdown();
 
-  // Show letter after 3 sec
   setTimeout(()=>{
     letterOverlay.style.display="flex";
   },3000);
