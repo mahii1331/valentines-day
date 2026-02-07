@@ -41,7 +41,6 @@ body{
   overflow:hidden;
 }
 
-/* BACKGROUND ANIMATION */
 @keyframes bgMove{
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
@@ -59,14 +58,8 @@ body{
 }
 
 @keyframes floatUp{
-  from{
-    transform:translateY(0) scale(.8);
-    opacity:.8;
-  }
-  to{
-    transform:translateY(-120vh) scale(1.4);
-    opacity:0;
-  }
+  from{transform:translateY(0) scale(.8);}
+  to{transform:translateY(-120vh) scale(1.4);opacity:0;}
 }
 
 /* CARD */
@@ -207,6 +200,66 @@ button{
   box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
 
+/* 💌 LETTER OVERLAY */
+#letterOverlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.4);
+
+  display:none;
+  justify-content:center;
+  align-items:center;
+
+  z-index:50;
+}
+
+/* LETTER */
+#letter{
+  width:90%;
+  max-width:340px;
+
+  background:#fff0f6;
+
+  border-radius:20px;
+  padding:25px 20px;
+
+  border:3px solid #ff4d6d;
+
+  box-shadow:0 0 30px rgba(255,80,130,.7);
+
+  text-align:center;
+
+  animation:letterPop .6s ease;
+}
+
+@keyframes letterPop{
+  from{transform:scale(.7);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+#letter h3{
+  color:#b8002e;
+  margin-bottom:10px;
+}
+
+#letter p{
+  font-size:15px;
+  color:#600018;
+  line-height:1.6;
+  margin-bottom:15px;
+}
+
+#closeLetter{
+  background:#ff4d6d;
+  color:white;
+  border:none;
+  border-radius:20px;
+  padding:8px 18px;
+  font-family:inherit;
+  cursor:pointer;
+}
+
 </style>
 </head>
 
@@ -247,12 +300,39 @@ button{
 
 </div>
 
+<!-- 💌 LETTER -->
+<div id="letterOverlay">
+
+  <div id="letter">
+
+    <h3>💌 My Love, Priya…</h3>
+
+    <p>
+      From the first day I met you,  
+      my world changed forever 💖<br><br>
+
+      You are my happiness, my peace,  
+      my best friend, and my home 🏡💕<br><br>
+
+      I promise to hold your hand  
+      through every smile and every storm 🤝💞<br><br>
+
+      April 23, 2026 is only the beginning…  
+      Our forever starts there 💍❤️
+    </p>
+
+    <button id="closeLetter">Close 💕</button>
+
+  </div>
+
+</div>
+
 <script>
 
 /* BACKGROUND HEARTS */
 function createHeart(){
 
-  const heart = document.createElement("div");
+  const heart=document.createElement("div");
   heart.className="bg-heart";
 
   heart.textContent=["💖","💕","💘","💗","🌹"][Math.floor(Math.random()*5)];
@@ -277,14 +357,8 @@ const msg=document.getElementById("msg");
 const music=document.getElementById("bgMusic");
 const countdownEl=document.getElementById("countdown");
 
-/* JOKES */
-const jokes=[
-  "Wait 😭","Please 🥺","Heyyy 😳",
-  "Not fair 😂","Stoppp 😵",
-  "I’m scared 😨","I surrender 😵‍💫"
-];
-
-let i=0;
+const letterOverlay=document.getElementById("letterOverlay");
+const closeLetter=document.getElementById("closeLetter");
 
 /* MOVE NO */
 function moveNo(){
@@ -301,22 +375,18 @@ function moveNo(){
 
   noBtn.style.left=x+"px";
   noBtn.style.top=y+"px";
-
-  msg.textContent=jokes[i%jokes.length];
-  i++;
 }
 
-/* AVOID YES */
 function isOnYes(x,y){
 
   const yes=yesBtn.getBoundingClientRect();
-  const cardBox=card.getBoundingClientRect();
+  const box=card.getBoundingClientRect();
 
   return !(
-    cardBox.left+x+noBtn.offsetWidth<yes.left||
-    cardBox.left+x>yes.right||
-    cardBox.top+y+noBtn.offsetHeight<yes.top||
-    cardBox.top+y>yes.bottom
+    box.left+x+noBtn.offsetWidth<yes.left||
+    box.left+x>yes.right||
+    box.top+y+noBtn.offsetHeight<yes.top||
+    box.top+y>yes.bottom
   );
 }
 
@@ -343,6 +413,16 @@ yesBtn.addEventListener("click",()=>{
   result.style.display="flex";
 
   startCountdown();
+
+  // Show letter after 3 sec
+  setTimeout(()=>{
+    letterOverlay.style.display="flex";
+  },3000);
+});
+
+/* CLOSE LETTER */
+closeLetter.addEventListener("click",()=>{
+  letterOverlay.style.display="none";
 });
 
 /* COUNTDOWN */
