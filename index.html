@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -17,7 +18,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 🌅 ANIMATED BACKGROUND */
+/* BACKGROUND */
 body{
   margin:0;
   min-height:100vh;
@@ -100,18 +101,23 @@ h1{
   margin-bottom:15px;
 }
 
-/* BUTTONS */
+/* BUTTON BASE */
 button{
   all:unset;
 
-  padding:12px 24px;
-  font-size:16px;
+  width:90px;
+  height:40px;
 
+  font-size:16px;
   border-radius:30px;
+
   cursor:pointer;
 
   position:absolute;
-  bottom:20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 /* YES */
@@ -120,16 +126,18 @@ button{
   color:white;
 
   left:25px;
+  bottom:20px;
+
   animation:pulse 1.5s infinite;
 }
 
-/* NO */
+/* NO (FIXED SIZE) */
 #noBtn{
   background:linear-gradient(to right,#ff4d6d,#ff1e56);
   color:white;
 
-  right:25px;
-  min-width:90px;
+  left:230px;
+  top:260px;
 }
 
 /* PULSE */
@@ -200,10 +208,11 @@ button{
   box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
 
-/* 💌 LETTER */
+/* LETTER */
 #letterOverlay{
   position:fixed;
   inset:0;
+
   background:rgba(0,0,0,.4);
 
   display:none;
@@ -296,7 +305,7 @@ button{
 
 </div>
 
-<!-- 💌 LETTER -->
+<!-- LETTER -->
 <div id="letterOverlay">
 
   <div id="letter">
@@ -318,7 +327,7 @@ button{
 
 <script>
 
-/* BACKGROUND HEARTS */
+/* HEARTS */
 function createHeart(){
 
   const heart=document.createElement("div");
@@ -359,7 +368,7 @@ const jokes=[
 
 let jokeIndex=0;
 
-/* MOVE NO (ONLY MOVE, NO SCALE) */
+/* MOVE NO */
 function moveNo(){
 
   const maxX=card.clientWidth-noBtn.offsetWidth;
@@ -375,7 +384,6 @@ function moveNo(){
   noBtn.style.left=x+"px";
   noBtn.style.top=y+"px";
 
-  // Funny message
   msg.textContent=jokes[jokeIndex%jokes.length];
   jokeIndex++;
 }
